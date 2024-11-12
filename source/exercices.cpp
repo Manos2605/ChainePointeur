@@ -3,7 +3,7 @@
 
 int longueur(const char* chaine){
     int length = 0;
-    while (chaine[length]!= '\0') {
+    while ((*(chaine+length))!= '\0') {
         length++;
     }
     
@@ -12,31 +12,31 @@ int longueur(const char* chaine){
 
 void copie(char* dest, const char* source) {
     int i;
-    for (i = 0; source[i] != '\0'; i++) {
-        dest[i] = source[i];
+    for (i = 0; *(source+i) != '\0'; i++) {
+        *(dest+i) = *(source+i);
     }
-    dest[i] = '\0'; 
+    *(dest+i) = '\0'; 
 }
 
 void concatene(char* dest, const char* source) {
    int i = 0;
     // Aller jusqu'à la dernuère lettre de destination
-    while (dest[i] != '\0') {
+    while (*(dest+i) != '\0') {
         i++;
     }
 
     // Ajouter à la suite de dest, les lettre de source
-    for (int j = 0; source[j] != '\0'; j++, i++) {
-        dest[i] = source[j];
+    for (int j = 0; *(source+j) != '\0'; j++, i++) {
+        *(dest+i) = *(source+j);
     }
-    dest[i] = '\0';
+    *(dest+i) = '\0';
 }
 
 int compare(const char* chaine1, const char* chaine2){
     int test = 0;
     int i = 0;
-    while (chaine1[i] != '\0' && chaine2[i] != '\0') {
-        if (chaine1[i]!= chaine2[i]) {
+    while (*(chaine1+i) != '\0' && *(chaine2+i) != '\0') {
+        if (*(chaine1+i)!= *(chaine2+i)) {
             test = 0;
             break;
         }
@@ -44,18 +44,18 @@ int compare(const char* chaine1, const char* chaine2){
         i++;
     }
 
-    if (chaine1[i] < chaine2[i]) test--;
-    if (chaine1[i] > chaine2[i]) test++;
+    if (*(chaine1+i) < *(chaine2+i)) test--;
+    if (*(chaine1+i) > *(chaine2+i)) test++;
 
     return test;
 }
 
 char* cherche_char(const char* chaine, char caractere) {
     int i = 0;
-    while (chaine[i] != '\0') {
-        if (chaine[i] == caractere) {
+    while (*(chaine+i) != '\0') {
+        if (*(chaine+i) == caractere) {
             // utilise un cast de const char* en char* comme la fonction renvoie un char*
-            return (char*)&chaine[i];
+            return (char*)&(*(chaine+i));
         }
         i++;
     }
